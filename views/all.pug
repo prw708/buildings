@@ -1,0 +1,28 @@
+extends ../../views/base.pug
+
+block append scripts
+  if cookieOptOut.acceptAnalytics
+    script(
+      id="recaptchaAPI"
+      type="text/javascript"
+      src=`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`
+    )
+
+block content
+  div(class="position-relative container-fluid px-0")
+    header(class="row p-4 g-0")
+      h1(class="display-3") SimCity 4 Buildings
+
+  div(class="row g-0")
+    noscript JavaScript must be enabled to view this content.
+    if !cookieOptOut.acceptAnalytics
+      div(class="analyticsCookieNotice")
+        p(class="alert alert-danger px-4 mb-0") Cookie settings must be set to accept analytics cookies to load all elements.
+    div(
+      id="root" 
+      data-username=loggedInAs
+      data-recaptchaSiteKey=recaptchaSiteKey
+      data-admin=admin
+    )
+
+  script(src="/projects/buildings/static/js/main.25a3adad.js")
